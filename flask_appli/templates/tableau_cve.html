@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="static/logo/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <aside>
+        <p>{{ ip }}</p>
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo" class="logo">        
+        <h1>Menu</h1>
+        <ul>
+            <li><a href="{{ url_for('accueil') }}" style="color: #fff; text-decoration: none;">Accueil</a></li>
+            <br>
+            <li><a href="{{ url_for('graphique') }}" style="color: #fff; text-decoration: none;">Services ouverts</a></li>
+            <br>
+            <li><a href="{{ url_for('tableau_cve') }}" style="color: #fff; text-decoration: none;">Tableau CVE</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <h1>Liste des CVE des ports ouverts</h1>
+
+        <button onclick="actualiser_cve()">Actualiser</button>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>CVE ID</th>
+                    <th>Description</th>
+                    <th>Score CVSS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in donnees_cve %}
+                    <tr>
+                        <td>{{ entry['CVE ID'] }}</td>
+                        <td>{{ entry['Description'] }}</td>
+                        <td>{{ entry['CVSS Score'] }}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        function actualiser_cve() {
+            fetch('/actualiser_cve')
+                .then(response => response.json())
+                .then(nouvellesDonnees => {
+                    // Mettre à jour les données dans le tableau
+                    const tbody = document.querySelector('tbody');
+                    tbody.innerHTML = ""; // Efface le contenu actuel du tableau
+
+                    nouvellesDonnees.forEach(entry => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${entry['CVE ID']}</td>
+                            <td>${entry['Description']}</td>
+                            <td>${entry['CVSS Score']}</td>
+
+                        `;
+                        tbody.appendChild(row);
+                    });
+                });
+        }
+    </script>
+</body>
+</html>

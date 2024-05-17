@@ -1,0 +1,72 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+aside {
+    background-color: #1E385B;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #1E385B;
+    color: #fff;
+}
+
+.logo {
+    width: 150px; 
+    height: auto; 
+}
+.jibou {
+    width: 1000px;
+    height: 100px;
+    margin-top: 250px;
+    text-align: left;
+    font-size: 30px; 
+}
+
+.titre {
+    margin-left: 40px;
+    width: 400px;
+    height: 800px;
+    padding: 20px;
+    text-align: right;
+
+}
+
+#graphique-container {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+#graphique-container canvas {
+    max-width: 100%;
+    height: auto;
+}
